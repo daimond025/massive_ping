@@ -1,4 +1,4 @@
-package main
+package ping
 
 import (
 	"golang.org/x/net/icmp"
