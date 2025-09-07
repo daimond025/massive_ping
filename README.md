@@ -1,0 +1,1 @@
+A massive ICMP Echo implementation, based on [golang.org/x/net/icmp][net-icmp].
