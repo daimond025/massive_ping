@@ -3,11 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	ping "github.com/daimond025/massive_ping"
 	"github.com/digineo/go-logwrap"
-	"net"
 	"os"
 	"runtime"
-	"sync"
 	"time"
 )
 
@@ -24,25 +23,8 @@ var (
 	size     = uint(56)
 	force    bool
 	verbose  bool
-	pinger   *Pinger
+	pinger   *ping.Pinger
 )
-
-func nextIP(ip net.IP) {
-	for i := len(ip) - 1; i >= 0; i-- {
-		ip[i]++
-		if ip[i] > 0 {
-			break
-		}
-	}
-}
-func worker(id int, jobs <-chan net.IP, wg *sync.WaitGroup) {
-	defer wg.Done()
-	for ip := range jobs {
-		fmt.Printf("Воркер %d обрабатывает IP: %s\n", id, ip)
-		// Имитация какой-либо работы
-		time.Sleep(100 * time.Millisecond)
-	}
-}
 
 func main() {
 
@@ -70,7 +52,7 @@ func main() {
 		log.Errorf("number of ping attempts (-c flag) must be > 0")
 	}
 
-	p, err := NewPinger()
+	p, err := ping.NewPinger()
 
 	if err != nil {
 		panic(err)
@@ -87,9 +69,9 @@ func main() {
 	//destination := " 192.138.88.1/24 192.138.89.1/24 2001:db8::/32"
 	destination := " 192.168.1.1/28 "
 	p.Targets_CIDR(destination)
-	p = Ping_CIDR(p, attempts, poolSize, timeout)
+	p = ping.Ping_CIDR(p, attempts, poolSize, timeout)
 
-	out_std(p)
+	ping.Out_std(p)
 
 	//ip, ipnet, err := net.ParseCIDR("192.168.1.0/28")
 	//

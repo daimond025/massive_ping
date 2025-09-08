@@ -1,12 +1,14 @@
 package ping
 
 import (
+	"github.com/digineo/go-logwrap"
 	"math/rand"
 	"time"
 )
 
 var (
 	rng = rand.New(rand.NewSource(time.Now().UnixNano()))
+	log = &logwrap.Instance{}
 )
 
 type DataLoad []byte
