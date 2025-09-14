@@ -50,7 +50,6 @@ func main() {
 		os.Exit(0)
 	}
 
-	println(cidr_adds)
 	if cidr_adds == "" {
 		log.Errorf("set CIDR networks  (-cidr flag) must be not empty")
 		os.Exit(0)
@@ -69,7 +68,6 @@ func main() {
 	//cidr_adds := " 192.138.88.1/24 192.138.89.1/24 2001:db8::/32"
 	//cidr_adds := " 192.138.89.1/24 192.168.1.1/28 "
 	err_cidr := p.Targets_CIDR(cidr_adds)
-	println(err_cidr)
 	if err_cidr != nil {
 		panic(err_cidr)
 	}
