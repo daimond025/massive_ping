@@ -5,6 +5,7 @@ import "errors"
 var (
 	errClosed   = errors.New("pinger closed")
 	errNotBound = errors.New("need at least one bind address")
+	errNotCIDR  = errors.New("empty  at least one bind address")
 )
 
 type timeoutError struct{}

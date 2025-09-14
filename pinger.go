@@ -117,7 +117,7 @@ func (pinger *Pinger) Targets(addres string) {
 	}
 }
 
-func (pinger *Pinger) Targets_CIDR(addres string) {
+func (pinger *Pinger) Targets_CIDR(addres string) error {
 	addres = strings.TrimSpace(addres)
 	addreses := strings.Split(addres, " ")
 
@@ -134,7 +134,12 @@ func (pinger *Pinger) Targets_CIDR(addres string) {
 				pinger.target_cidr[adr] = destination_cidr{ip: ip, net: ipnet, type_net: net.IPv6len}
 			}
 		}
+	}
 
+	if len(pinger.target_cidr) == 0 {
+		return errNotCIDR
+	} else {
+		return nil
 	}
 }
 
