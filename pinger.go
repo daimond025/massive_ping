@@ -99,7 +99,7 @@ func (pinger *Pinger) CreateConnection(bind4, bind6 string, size uint) error {
 
 func (pinger *Pinger) Targets(addres string) {
 	addres = strings.TrimSpace(addres)
-	addreses := strings.Split(addres, " ")
+	addreses := strings.Split(addres, ",")
 
 	for _, adr := range addreses {
 		adr = strings.Replace(adr, " ", "", -1)
@@ -119,7 +119,7 @@ func (pinger *Pinger) Targets(addres string) {
 
 func (pinger *Pinger) Targets_CIDR(addres string) error {
 	addres = strings.TrimSpace(addres)
-	addreses := strings.Split(addres, " ")
+	addreses := strings.Split(addres, ",")
 
 	for _, adr := range addreses {
 		adr = strings.Replace(adr, " ", "", -1)

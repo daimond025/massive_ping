@@ -37,15 +37,23 @@ func main() {
 	flag.StringVar(&bind_v6, "6", bind_v6, "IPv6 bind address")
 	flag.IntVar(&poolSize, "P", poolSize, "concurrency level")
 	flag.BoolVar(&verbose, "v", verbose, "also print out unreachable addresses")
+	flag.StringVar(&cidr_adds, "cidr", cidr_adds, "set cidr network  ")
 	flag.Parse()
 
 	if bind_v4 == "" && bind_v6 == "" {
 		log.Errorf("need at least an IPv4 (-bind4 flag) or IPv6 (-bind6 flag) address to bind to")
+		os.Exit(0)
 	}
-	println(size)
 
 	if attempts <= 0 {
 		log.Errorf("number of ping attempts (-c flag) must be > 0")
+		os.Exit(0)
+	}
+
+	println(cidr_adds)
+	if cidr_adds == "" {
+		log.Errorf("set CIDR networks  (-cidr flag) must be not empty")
+		os.Exit(0)
 	}
 
 	p, err := ping.NewPinger()
@@ -59,8 +67,9 @@ func main() {
 	}
 
 	//cidr_adds := " 192.138.88.1/24 192.138.89.1/24 2001:db8::/32"
-	cidr_adds := " 192.168.1.1/28 "
+	//cidr_adds := " 192.138.89.1/24 192.168.1.1/28 "
 	err_cidr := p.Targets_CIDR(cidr_adds)
+	println(err_cidr)
 	if err_cidr != nil {
 		panic(err_cidr)
 	}
