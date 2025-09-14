@@ -64,7 +64,7 @@ func NewPinger() (*Pinger, error) {
 	return &pinger, nil
 }
 
-func (pinger *Pinger) CreateConnection(bind4, bind6 string) error {
+func (pinger *Pinger) CreateConnection(bind4, bind6 string, size int) error {
 	conn4, err_4 := connectICMP("ip4:icmp", bind4)
 	if err_4 != nil {
 		return err_4
@@ -84,7 +84,7 @@ func (pinger *Pinger) CreateConnection(bind4, bind6 string) error {
 	pinger.conn4 = &conn4
 	pinger.conn6 = &conn6
 	pinger.requests = make(map[uint32]simpleRequest)
-	pinger.SetPayloadSize(56)
+	pinger.SetPayloadSize(uint16(size))
 
 	if conn4 != nil {
 		pinger.wg.Add(1)

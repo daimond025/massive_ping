@@ -42,6 +42,7 @@ func main() {
 	if bind_v4 == "" && bind_v6 == "" {
 		log.Errorf("need at least an IPv4 (-bind4 flag) or IPv6 (-bind6 flag) address to bind to")
 	}
+	println(size)
 
 	if attempts <= 0 {
 		log.Errorf("number of ping attempts (-c flag) must be > 0")
@@ -57,11 +58,11 @@ func main() {
 		panic(err)
 	}
 
-	cidr_adds := " 192.138.88.1/24 192.138.89.1/24 2001:db8::/32"
-	//cidr_adds := " 192.168.1.1/28 "
-	err := p.Targets_CIDR(cidr_adds)
-	if err != nil {
-		panic(err)
+	//cidr_adds := " 192.138.88.1/24 192.138.89.1/24 2001:db8::/32"
+	cidr_adds := " 192.168.1.1/28 "
+	err_cidr := p.Targets_CIDR(cidr_adds)
+	if err_cidr != nil {
+		panic(err_cidr)
 	}
 	p = ping.Ping_CIDR(p, attempts, poolSize, timeout)
 
