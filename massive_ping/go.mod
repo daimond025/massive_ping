@@ -3,7 +3,7 @@ module main
 go 1.24.3
 
 require (
-	github.com/daimond025/massive_ping v0.0.0-20250914180306-54e04f054f3a
+	github.com/daimond025/massive_ping  v0.0.0-20250914184945-d2c436db6332
 	github.com/digineo/go-logwrap v0.0.0-20181106161722-a178c58ea3f0
 )
 

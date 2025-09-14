@@ -53,7 +53,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	err = p.CreateConnection(bind_v4, bind_v6)
+	err = p.CreateConnection(bind_v4, bind_v6, size)
 	if err != nil {
 		panic(err)
 	}

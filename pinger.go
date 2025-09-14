@@ -64,7 +64,7 @@ func NewPinger() (*Pinger, error) {
 	return &pinger, nil
 }
 
-func (pinger *Pinger) CreateConnection(bind4, bind6 string, size int) error {
+func (pinger *Pinger) CreateConnection(bind4, bind6 string, size uint) error {
 	conn4, err_4 := connectICMP("ip4:icmp", bind4)
 	if err_4 != nil {
 		return err_4
