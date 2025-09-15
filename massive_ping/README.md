@@ -3,5 +3,6 @@ daimond025
 
 Simple example to ping some networks and show hosts online
 
-Example run
-![Image alt](https://github.com/{username}/{repository}/raw/{branch}/{path}/image.png)
+Example
+
+![Command Run](https://github.com/daimond025/massive_ping/blob/master/massive_ping/example.png?raw=true)

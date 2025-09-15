@@ -21,7 +21,6 @@ var (
 	size      = uint(56)
 	verbose   bool
 	cidr_adds = ""
-	pinger    *ping.Pinger
 )
 
 func main() {
@@ -36,7 +35,6 @@ func main() {
 	flag.StringVar(&bind_v4, "4", bind_v4, "IPv4 bind address")
 	flag.StringVar(&bind_v6, "6", bind_v6, "IPv6 bind address")
 	flag.IntVar(&poolSize, "P", poolSize, "concurrency level")
-	flag.BoolVar(&verbose, "v", verbose, "also print out unreachable addresses")
 	flag.StringVar(&cidr_adds, "cidr", cidr_adds, "set cidr network  ")
 	flag.Parse()
 
@@ -54,7 +52,6 @@ func main() {
 		log.Errorf("set CIDR networks  (-cidr flag) must be not empty")
 		os.Exit(0)
 	}
-
 	p, err := ping.NewPinger()
 
 	if err != nil {

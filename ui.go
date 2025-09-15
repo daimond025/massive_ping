@@ -96,7 +96,7 @@ func Draw(pinger *Pinger, ui *userInterface) {
 		row += 1
 	}
 }
-func buildTUI(pinger *Pinger) *userInterface {
+func BuildTUI(pinger *Pinger) *userInterface {
 	ui := &userInterface{
 		app:   tview.NewApplication(),
 		table: tview.NewTable().SetBorders(true).SetFixed(2, 0),
@@ -154,7 +154,7 @@ func (ui *userInterface) Run() error {
 	return ui.app.Run()
 }
 
-func (ui *userInterface) update(pinger *Pinger, interval time.Duration) {
+func (ui *userInterface) Update(pinger *Pinger, interval time.Duration) {
 	ticker := time.NewTicker(1 * time.Second)
 
 	for {
