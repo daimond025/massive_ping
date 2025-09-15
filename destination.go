@@ -34,9 +34,7 @@ func (pinger *Pinger) ping_item(dest destination, timeout time.Duration, attempt
 }
 
 func (pinger Pinger) PingRequest(timeout time.Duration, attempts int) {
-	for addr, dest := range pinger.target {
-		println(addr)
-
+	for _, dest := range pinger.target {
 		for i := 0; i < attempts; i++ {
 			pinger.complate.Add(1)
 			go pinger.ping_item(dest, timeout, i)
