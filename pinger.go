@@ -99,10 +99,16 @@ func (pinger *Pinger) CreateConnection(bind4, bind6 string, size uint) error {
 
 func (pinger *Pinger) Targets(addres string) error {
 	addres = strings.TrimSpace(addres)
+	if !strings.Contains(addres, ",") {
+		addres += ","
+	}
 	addreses := strings.Split(addres, ",")
 
 	for _, adr := range addreses {
 		adr = strings.Replace(adr, " ", "", -1)
+		if adr == "" {
+			continue
+		}
 		adr_v4, err_v4 := net.ResolveIPAddr("ip4", adr)
 		if err_v4 == nil {
 			pinger.target[adr] = destination{remote: adr_v4, host: adr}
@@ -115,7 +121,8 @@ func (pinger *Pinger) Targets(addres string) error {
 			continue
 		}
 	}
-	if len(pinger.target_cidr) == 0 {
+
+	if len(pinger.target) == 0 {
 		return errNotHOSTS
 	} else {
 		return nil

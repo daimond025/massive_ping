@@ -4,11 +4,13 @@ import (
 	"flag"
 	"fmt"
 	ping "github.com/daimond025/massive_ping"
+	"github.com/digineo/go-logwrap"
 	"os"
 	"time"
 )
 
 var (
+	log              = &logwrap.Instance{}
 	attempts    uint = 3
 	timeout          = time.Second
 	bind_v6          = "::"
@@ -33,13 +35,15 @@ func main() {
 	flag.Parse()
 
 	//destination := " 8.8.8.8, google.com, fe80:0000:0000:0000:0f19:1faf:008:5010"
+	destination := "8.8.8.8"
 	p, err := ping.NewPinger()
 	if err != nil {
 		panic(err)
 	}
 	err_host := p.Targets(destination)
 	if err_host != nil {
-		panic(err_host)
+		log.Errorf("set hosts   (-h flag) must be not empty")
+		os.Exit(0)
 	}
 
 	err = p.CreateConnection(bind_v4, bind_v6, size)
