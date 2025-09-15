@@ -34,8 +34,6 @@ func main() {
 	flag.StringVar(&bind_v6, "6", bind_v6, "IPv6 bind address")
 	flag.Parse()
 
-	//destination := " 8.8.8.8, google.com, fe80:0000:0000:0000:0f19:1faf:008:5010"
-	destination := "8.8.8.8"
 	p, err := ping.NewPinger()
 	if err != nil {
 		panic(err)
