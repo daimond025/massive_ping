@@ -37,8 +37,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	targets := p.Targets(destination)
-	if targets
+	err_host := p.Targets(destination)
+	if err_host != nil {
+		panic(err_host)
+	}
 
 	err = p.CreateConnection(bind_v4, bind_v6, size)
 	if err != nil {

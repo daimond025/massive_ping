@@ -97,7 +97,7 @@ func (pinger *Pinger) CreateConnection(bind4, bind6 string, size uint) error {
 	return nil
 }
 
-func (pinger *Pinger) Targets(addres string) int {
+func (pinger *Pinger) Targets(addres string) error {
 	addres = strings.TrimSpace(addres)
 	addreses := strings.Split(addres, ",")
 
@@ -115,7 +115,11 @@ func (pinger *Pinger) Targets(addres string) int {
 			continue
 		}
 	}
-	return len(pinger.target)
+	if len(pinger.target_cidr) == 0 {
+		return errNotHOSTS
+	} else {
+		return nil
+	}
 }
 
 func (pinger *Pinger) Targets_CIDR(addres string) error {
